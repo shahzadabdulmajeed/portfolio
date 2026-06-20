@@ -240,17 +240,17 @@ const PickerBody: React.FC<{ value: string; onChange: (v: string) => void; onClo
       </div>
 
       {/* Footer */}
-      {!inline && (
-        <div style={{ padding: '14px 22px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: 'var(--bg-card)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            {selected && <><img src={selected} alt="" style={{ width: 36, height: 28, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border)' }} onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} /><span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selected}</span></>}
-          </div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button onClick={onClose} className="btn-ghost" style={{ padding: '9px 20px', fontSize: '0.85rem' }}>Cancel</button>
-            <button onClick={confirm} className="btn-primary" style={{ padding: '9px 20px', fontSize: '0.85rem' }} disabled={!(tab === 'url' ? urlInput.trim() : selected)}>Use Image</button>
-          </div>
+      <div style={{ padding: '14px 22px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0, background: 'var(--bg-card)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          {selected && <><img src={selected} alt="" style={{ width: 36, height: 28, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border)' }} onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} /><span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selected}</span></>}
         </div>
-      )}
+        <div style={{ display: 'flex', gap: 8 }}>
+          {!inline && <button onClick={onClose} className="btn-ghost" style={{ padding: '9px 20px', fontSize: '0.85rem' }}>Cancel</button>}
+          <button onClick={confirm} className="btn-primary" style={{ padding: '9px 20px', fontSize: '0.85rem' }} disabled={!(tab === 'url' ? urlInput.trim() : selected)}>
+            {inline ? 'Select Image' : 'Use Image'}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
