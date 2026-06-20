@@ -6,7 +6,7 @@ import { supabase } from '../lib/supabase';
  * Supabase service-role key (never exposed to the browser).
  */
 export async function saveDB(db: DB, password: string): Promise<void> {
-  const res = await fetch('/.netlify/functions/save-db', {
+  const res = await fetch('/api/save-db', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ data: db, password }),
