@@ -24,47 +24,51 @@ const Hero: React.FC = () => {
   ].filter(Boolean) as { href: string; icon: React.ReactNode; label: string }[];
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: 80, paddingBottom: 40 }}>
-      {/* Background */}
-      <div className="orb" style={{ width: 600, height: 600, top: '-10%', right: '-5%', background: 'var(--indigo)', animationDelay: '0s', opacity: 0.12 }} />
-      <div className="orb" style={{ width: 400, height: 400, bottom: '5%', left: '-5%', background: 'var(--emerald)', animationDelay: '3s', opacity: 0.1 }} />
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.025, backgroundImage: 'linear-gradient(var(--text-base) 1px,transparent 1px),linear-gradient(90deg,var(--text-base) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
+    <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', paddingTop: 110, paddingBottom: 60, background: 'var(--bg)' }}>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', width: '100%', position: 'relative', zIndex: 10 }}>
+      {/* Soft background orbs */}
+      <div className="orb" style={{ width: 700, height: 700, top: '-15%', right: '-8%', background: '#e0e7ff', animationDelay: '0s', opacity: 0.6 }} />
+      <div className="orb" style={{ width: 500, height: 500, bottom: '0%', left: '-8%', background: '#d1fae5', animationDelay: '4s', opacity: 0.45 }} />
+      <div className="orb" style={{ width: 320, height: 320, top: '30%', left: '35%', background: '#ede9fe', animationDelay: '2s', opacity: 0.35 }} />
+
+      {/* Subtle dot grid */}
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.4, backgroundImage: 'radial-gradient(circle, #cbd5e1 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
+
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 28px', width: '100%', position: 'relative', zIndex: 10 }}>
         <div className="hero-grid">
 
           {/* ── Left: Text ── */}
           <div>
-            {/* Badge */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 9999, border: '1px solid rgba(99,102,241,0.35)', background: 'rgba(99,102,241,0.08)', color: 'var(--indigo)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 28 }}>
+            {/* Status badge */}
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 9999, border: '1px solid rgba(99,102,241,0.22)', background: 'rgba(99,102,241,0.07)', color: 'var(--indigo-dark)', fontSize: '0.78rem', fontWeight: 600, marginBottom: 28, letterSpacing: '0.01em' }}>
               <Sparkles size={13} />
               {hero?.badge ?? 'Open for new AI opportunities'}
             </motion.div>
 
             {/* Name */}
-            <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
-              style={{ fontSize: 'clamp(2.6rem, 5vw, 4.4rem)', fontWeight: 800, lineHeight: 1.06, letterSpacing: '-0.03em', marginBottom: 18 }}>
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }}
+              style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.035em', marginBottom: 16, color: 'var(--text-base)' }}>
               Hi, I'm{' '}
-              <span className="grad-text glow-text">{hero?.name ?? 'Shahzad'}</span>
+              <span className="grad-text">{hero?.name ?? 'Shahzad'}</span>
             </motion.h1>
 
             {/* Animated role */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-              style={{ height: 44, overflow: 'hidden', marginBottom: 24 }}>
+              style={{ height: 42, overflow: 'hidden', marginBottom: 22 }}>
               <AnimatePresence mode="wait">
                 <motion.p key={roleIndex}
-                  initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.55rem)', color: 'var(--text-muted)', fontWeight: 600 }}>
+                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.28 }}
+                  style={{ fontSize: 'clamp(1.05rem, 2.5vw, 1.45rem)', color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '-0.01em' }}>
                   {roles[roleIndex]}
                 </motion.p>
               </AnimatePresence>
             </motion.div>
 
             {/* Description */}
-            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }}
-              style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: 40, maxWidth: 540 }}>
+            <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38 }}
+              style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.82, marginBottom: 36, maxWidth: 520 }}>
               {hero ? hero.description.split(' ').map((word, i) => {
                 const hi = hero.highlightWords.some(hw => hw.split(' ').includes(word));
                 return <span key={i} style={hi ? { color: 'var(--text-base)', fontWeight: 700 } : {}}>{word} </span>;
@@ -72,18 +76,18 @@ const Hero: React.FC = () => {
             </motion.p>
 
             {/* CTAs */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-              style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 44 }}>
+            <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+              style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 40 }}>
               <a href="#projects" className="btn-primary">View My Work</a>
               {about?.cvUrl
-                ? <a href={about.cvUrl} download className="btn-ghost"><Download size={16} />Download CV</a>
-                : <a href="#about" className="btn-ghost"><Mail size={16} />Contact Me</a>
+                ? <a href={about.cvUrl} download className="btn-ghost"><Download size={15} />Download CV</a>
+                : <a href="#about" className="btn-ghost"><Mail size={15} />Contact Me</a>
               }
             </motion.div>
 
-            {/* Socials */}
+            {/* Socials row */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.65 }}
-              style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
               {socials.map(({ href, icon, label }) => (
                 <SocialLink key={href} href={href} icon={icon} label={label} size={40} />
               ))}
@@ -98,26 +102,24 @@ const Hero: React.FC = () => {
           </div>
 
           {/* ── Right: Photo ── */}
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.6 }}
+          <motion.div initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.18, duration: 0.55 }}
             style={{ position: 'relative' }} className="hero-photo-col">
-            {/* Glow ring */}
-            <div style={{ position: 'absolute', inset: -3, borderRadius: '50%', background: 'linear-gradient(135deg, var(--indigo), var(--emerald))', filter: 'blur(20px)', opacity: 0.35 }} />
-            {/* Photo */}
-            <div style={{ position: 'relative', borderRadius: '50%', overflow: 'hidden', border: '3px solid rgba(99,102,241,0.4)', aspectRatio: '1', background: 'var(--bg-card)' }}>
-            {about?.photo && (
-              <img
-                src={about.photo}
-                alt={hero?.name ?? 'M.Shahzad'}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }}
-                onMouseEnter={e => ((e.target as HTMLImageElement).style.transform = 'scale(1.04)')}
-                onMouseLeave={e => ((e.target as HTMLImageElement).style.transform = 'scale(1)')}
-              />
-            )}
+            {/* Glow behind photo */}
+            <div style={{ position: 'absolute', inset: -20, borderRadius: '50%', background: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)', pointerEvents: 'none' }} />
+            {/* Photo ring */}
+            <div style={{ position: 'relative', borderRadius: '50%', overflow: 'hidden', border: '3px solid rgba(99,102,241,0.25)', aspectRatio: '1', background: 'var(--bg-elevated)', boxShadow: '0 20px 60px rgba(99,102,241,0.15), 0 4px 20px rgba(15,23,42,0.08)' }}>
+              {about?.photo && (
+                <img src={about.photo} alt={hero?.name ?? 'M.Shahzad'}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.5s' }}
+                  onMouseEnter={e => ((e.target as HTMLImageElement).style.transform = 'scale(1.04)')}
+                  onMouseLeave={e => ((e.target as HTMLImageElement).style.transform = 'scale(1)')}
+                />
+              )}
             </div>
             {/* Availability badge */}
-            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3, repeat: Infinity }}
-              style={{ position: 'absolute', bottom: 24, right: -16, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8, boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}>
-              <div style={{ width: 8, height: 8, borderRadius: 9999, background: 'var(--emerald)', boxShadow: '0 0 8px var(--emerald)' }} />
+            <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 3.2, repeat: Infinity }}
+              style={{ position: 'absolute', bottom: 28, right: -12, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 8, boxShadow: 'var(--shadow-md)' }}>
+              <div style={{ width: 8, height: 8, borderRadius: 9999, background: 'var(--emerald)', boxShadow: '0 0 6px rgba(5,150,105,0.6)', flexShrink: 0 }} />
               <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-base)', whiteSpace: 'nowrap' }}>
                 {about?.availability ?? 'Available for Freelance'}
               </span>
@@ -126,16 +128,17 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Scroll indicator */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.4 }}
-          style={{ marginTop: 80, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8, color: 'var(--text-faint)', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3 }}
+          style={{ marginTop: 72, display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6, color: 'var(--text-faint)', fontSize: '0.68rem', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
           <span>Scroll</span>
-          <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
-            <ArrowDown size={14} />
+          <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>
+            <ArrowDown size={13} />
           </motion.div>
         </motion.div>
       </div>
 
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 140, background: 'linear-gradient(to top, var(--bg), transparent)', pointerEvents: 'none' }} />
+      {/* Fade-to-bg at bottom */}
+      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 100, background: 'linear-gradient(to top, var(--bg), transparent)', pointerEvents: 'none' }} />
     </section>
   );
 };

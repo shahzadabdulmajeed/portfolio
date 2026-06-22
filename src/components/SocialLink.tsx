@@ -30,7 +30,7 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
     pointerEvents: 'none',
     opacity: hovered ? 1 : 0,
     transition: 'opacity 0.15s, transform 0.15s',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+    boxShadow: 'var(--shadow-md)',
     zIndex: 200,
     ...(isDown
       ? { top: '100%', marginTop: 6 }
@@ -60,12 +60,12 @@ export const SocialLink: React.FC<SocialLinkProps> = ({
         onMouseLeave={() => setHovered(false)}
         style={{
           width: size, height: size, borderRadius: 10,
-          background: 'var(--bg-elevated)', border: '1px solid var(--border)',
+          background: hovered ? 'var(--indigo-dim)' : 'var(--bg-card)',
+          border: `1px solid ${hovered ? 'rgba(99,102,241,0.35)' : 'var(--border)'}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: hovered ? 'var(--indigo)' : 'var(--text-faint)',
-          borderColor: hovered ? 'var(--indigo)' : 'var(--border)',
-          boxShadow: hovered ? '0 0 14px var(--indigo-glow)' : 'none',
-          transition: 'all 0.2s', textDecoration: 'none',
+          color: hovered ? 'var(--indigo)' : 'var(--text-muted)',
+          boxShadow: hovered ? '0 2px 10px var(--indigo-glow)' : 'var(--shadow-sm)',
+          transition: 'all 0.18s', textDecoration: 'none',
         }}
       >
         {icon}
